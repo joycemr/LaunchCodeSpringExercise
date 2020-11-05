@@ -39,7 +39,7 @@ public class TaskController {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
         TodoItem todoItem = optionalTodoItem.get();
-        Task newTask = new Task(todoItem, incomingTask.getText());
+        Task newTask = new Task(incomingTask.getText());
         todoItem.addTask(newTask);
         todoRepository.save(todoItem);
         // TODO If I'm saving only the parent, how best to get the newTask.id?

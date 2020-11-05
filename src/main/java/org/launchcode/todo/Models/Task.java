@@ -32,11 +32,6 @@ public class Task {
         this.text = text;
     }
 
-    public Task(TodoItem todoItem, String text) {
-        this.todoItem = todoItem;
-        this.text = text;
-    }
-
     public Integer getId() {
         return this.id;
     }

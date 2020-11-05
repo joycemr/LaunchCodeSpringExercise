@@ -62,7 +62,14 @@ public class TodoItem implements ITodoItem {
   }
 
   public void addTask(Task task) {
+    task.setTodoItem(this);
     this.tasks.add(task);
+  }
+
+  public void addTasks(List<Task> tasks) {
+    for (Task task : tasks) {
+      addTask(task);
+    }
   }
 
   @OneToMany(mappedBy = "todoItem", cascade = { CascadeType.ALL })
