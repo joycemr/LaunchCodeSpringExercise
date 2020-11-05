@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +58,7 @@ public class TaskController {
         newTask.setTodoItem(todoItem);
         newTask = taskRepository.save(newTask);
         OutboundTask newOutboundTask = new OutboundTask(newTask);
-        return ResponseEntity.ok().body(newOutboundTask);
+        URI location = URI.create("http://localhost:8080/todos/" + newTask.getId() + "/tasks");
+        return ResponseEntity.created(location).body(newOutboundTask);
     }
 }

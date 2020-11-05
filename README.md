@@ -105,7 +105,7 @@ An API consumer would be able to make a request for all a TodoItem's associated 
 
 An API consumer would be able to add tasks toa  TodoItem by:
 
-- POST /todos/{id}/features ({"title": "some sub task"}) -> 201
+- POST /todos/{id}/features {"title": "some sub task"}() -> 201
 
 ## Take Inventory
 
@@ -117,18 +117,18 @@ In no particular order:
 
 - [x] We will have to refactor the TodoItem entity so that it has a OneToMany relationship with the Task entity.
 
-- [ ] We will have to add controller logic that allows consumers to:
+- [x] We will have to add controller logic that allows consumers to:
 
 - GET /todos/{id}/tasks -> 200 Collection of Tasks entities
 - POST /todos/{id}/tasks ({"text": "some task"}) -> 201
 
-- [ ] This will go in the provided, but empty, `TaskController.java` file.
+- [x] This will go in the provided, but empty, `TaskController.java` file.
 
-- [ ] We will have to create a `TaskDto` for controlling the serialization of incoming, and outgoing requests that contain Tasks.
+- [x] We will have to create a `TaskDto` for controlling the serialization of incoming, and outgoing requests that contain Tasks.
 
-- [ ] We will have to create an `OutgoingTodoItem` DTO for controlling the serialization of outgoing TodoItem representations.
+- [x] We will have to create an `OutgoingTodoItem` DTO for controlling the serialization of outgoing TodoItem representations.
 
-- [ ] We will have to write tests to ensure the new endpoints listed above work properly.
+- [x] We will have to write tests to ensure the new endpoints listed above work properly.
 
 # Setup
 
