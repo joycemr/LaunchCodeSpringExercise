@@ -58,8 +58,9 @@ public class TodoController {
             return ResponseEntity.status(404).build();
         }
         TodoItem updatedTodo = todoItem.get().markAsComplete();
-        todoRepository.save(updatedTodo);
-        return ResponseEntity.status(200).body(updatedTodo);
+        updatedTodo = todoRepository.save(updatedTodo);
+        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.outgoingTodoItemFromTodoItem(updatedTodo);
+        return ResponseEntity.status(200).body(outgoingTodoItem);
     }
 
     @DeleteMapping(value = "/{id}")
