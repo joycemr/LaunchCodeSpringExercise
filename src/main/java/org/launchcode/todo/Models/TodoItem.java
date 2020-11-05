@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ interface ITodoItem {
 }
 
 @Entity
+@Table(name = "todo_items")
 public class TodoItem implements ITodoItem {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
