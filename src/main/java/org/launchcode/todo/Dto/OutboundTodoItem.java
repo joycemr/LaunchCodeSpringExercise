@@ -11,13 +11,15 @@ public class OutboundTodoItem {
 	private int id;
 	private String text;
 	private boolean completed;
-	private List<Task> tasks = new ArrayList<>();
+	private List<OutboundTask> tasks = new ArrayList<>();
 
 	public OutboundTodoItem(TodoItem todoItem) {
 		this.id = todoItem.getId();
 		this.text = todoItem.getText();
 		this.completed = todoItem.getCompleted();
-		this.tasks = todoItem.getTasks();
+		for (Task task : todoItem.getTasks()) {
+			this.tasks.add(new OutboundTask(task));
+		}
 	}
 
 	public static OutboundTodoItem outgoingTodoItemFromTodoItem(TodoItem todoItem) {
@@ -54,11 +56,11 @@ public class OutboundTodoItem {
 	}
 
 
-	public List<Task> getTasks() {
+	public List<OutboundTask> getTasks() {
 		return this.tasks;
 	}
 
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(List<OutboundTask> tasks) {
 		this.tasks = tasks;
 	}
 
