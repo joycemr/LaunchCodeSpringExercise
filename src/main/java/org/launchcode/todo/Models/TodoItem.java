@@ -31,6 +31,9 @@ public class TodoItem implements ITodoItem {
   private String text;
   private boolean completed;
 
+  @OneToMany(mappedBy = "todoItem", cascade = { CascadeType.ALL })
+  private List<Task> tasks = new ArrayList<>();
+
   public int getId() {
     return this.id;
   }
@@ -72,7 +75,14 @@ public class TodoItem implements ITodoItem {
     }
   }
 
-  @OneToMany(mappedBy = "todoItem", cascade = { CascadeType.ALL })
-  private List<Task> tasks = new ArrayList<>();
+  public List<Task> getTasks() {
+    return this.tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    for (Task task : tasks) {
+      addTask(task);
+    }
+  }
 
 }

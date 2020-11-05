@@ -1,5 +1,6 @@
 package org.launchcode.todo.Controllers;
 
+import org.launchcode.todo.Dto.OutboundTask;
 import org.launchcode.todo.Models.IncomingTask;
 import org.launchcode.todo.Models.Task;
 import org.launchcode.todo.Models.TodoItem;
@@ -15,34 +16,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/todos/{id}/tasks")
+@RequestMapping(value = "/todos/{todoId}/tasks")
 public class TaskController {
 
     @Autowired
     TodoRepository todoRepository;
 
     @Autowired
-    TaskRepository TaskRepository;
+    TaskRepository taskRepository;
 
     @GetMapping
-    public ResponseEntity<Object> getTodoTasks(@PathVariable int id) {
-        return ResponseEntity.status(418).build();
+    public ResponseEntity<Object> getTodoTasks(@PathVariable int todoId) {
+        Optional<TodoItem> optionalTodoItem = todoRepository.findById(todoId);
+        if (optionalTodoItem.isEmpty()) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+        TodoItem todoItem = optionalTodoItem.get();
+        List<Task> listOfTasks = todoItem.getTasks();
+        // build a list of outbound Task DTO's
+        List<OutboundTask> outboundList = new ArrayList<>();
+        for (Task task : listOfTasks) {
+            outboundList.add(new OutboundTask(task));
+        }
+        return ResponseEntity.ok().body(outboundList);
     }
 
     @PostMapping
-    public ResponseEntity<Object> postTodoTasks(@PathVariable int id, @RequestBody IncomingTask incomingTask) {
-        Optional<TodoItem> optionalTodoItem = todoRepository.findById(id);
+    public ResponseEntity<Object> postTodoTasks(@PathVariable int todoId, @RequestBody IncomingTask incomingTask) {
+        Optional<TodoItem> optionalTodoItem = todoRepository.findById(todoId);
         if (!optionalTodoItem.isPresent()) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
         TodoItem todoItem = optionalTodoItem.get();
         Task newTask = new Task(incomingTask.getText());
-        todoItem.addTask(newTask);
-        todoRepository.save(todoItem);
-        // TODO If I'm saving only the parent, how best to get the newTask.id?
-        return ResponseEntity.ok().body(newTask);
+        newTask.setTodoItem(todoItem);
+        newTask = taskRepository.save(newTask);
+        OutboundTask newOutboundTask = new OutboundTask(newTask);
+        return ResponseEntity.ok().body(newOutboundTask);
     }
 }

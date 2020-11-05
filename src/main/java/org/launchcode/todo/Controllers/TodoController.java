@@ -1,9 +1,8 @@
 package org.launchcode.todo.Controllers;
 
-import java.util.List;
-import java.util.Optional;
-
+import org.launchcode.todo.Dto.OutboundTodoItem;
 import org.launchcode.todo.Models.IncomingTodoItem;
+import org.launchcode.todo.Dto.OutboundTodoItem;
 import org.launchcode.todo.Models.TodoItem;
 import org.launchcode.todo.data.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/todos")
@@ -34,11 +36,12 @@ public class TodoController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getTodoById(@PathVariable int id) {
         Optional<TodoItem> todoItem = todoRepository.findById(id);
-        if(todoItem.isEmpty()) {
+        if (todoItem.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         TodoItem item = todoItem.get();
-        return ResponseEntity.status(200).body(item);
+        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.outgoingTodoItemFromTodoItem(item);
+        return ResponseEntity.status(200).body(outgoingTodoItem);
     }
 
     @PostMapping
