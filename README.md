@@ -113,22 +113,22 @@ This will require us as the developers of the API to make some changes.
 
 In no particular order:
 
-We will have to create a Task entity with a ManyToOne relationship to the TodoItem entity.
+- [x] We will have to create a Task entity with a ManyToOne relationship to the TodoItem entity.
 
-We will have to refactor the TodoItem entity so that it has a OneToMany relationship with the Task entity.
+- [x] We will have to refactor the TodoItem entity so that it has a OneToMany relationship with the Task entity.
 
-We will have to add controller logic that allows consumers to:
+- [ ] We will have to add controller logic that allows consumers to:
 
 - GET /todos/{id}/tasks -> 200 Collection of Tasks entities
 - POST /todos/{id}/tasks ({"text": "some task"}) -> 201
 
-This will go in the provided, but empty, `TaskController.java` file.
+- [ ] This will go in the provided, but empty, `TaskController.java` file.
 
-We will have to create a `TaskDto` for controlling the serialization of incoming, and outgoing requests that contain Tasks.
+- [ ] We will have to create a `TaskDto` for controlling the serialization of incoming, and outgoing requests that contain Tasks.
 
-We will have to create an `OutgoingTodoItem` DTO for controlling the serialization of outgoing TodoItem representations.
+- [ ] We will have to create an `OutgoingTodoItem` DTO for controlling the serialization of outgoing TodoItem representations.
 
-We will have to write tests to ensure the new endpoints listed above work properly.
+- [ ] We will have to write tests to ensure the new endpoints listed above work properly.
 
 # Setup
 
