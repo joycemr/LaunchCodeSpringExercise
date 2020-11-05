@@ -58,11 +58,14 @@ public class TodoItem implements ITodoItem {
 
   public static TodoItem createItem(String text) {
     TodoItem todoItem = new TodoItem(text);
-    
     return todoItem;
   }
 
-  @OneToMany(mappedBy = "id", cascade = { CascadeType.ALL })
+  public void addTask(Task task) {
+    this.tasks.add(task);
+  }
+
+  @OneToMany(mappedBy = "todoItem", cascade = { CascadeType.ALL })
   private List<Task> tasks = new ArrayList<>();
 
 }
