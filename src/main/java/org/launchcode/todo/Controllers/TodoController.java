@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,11 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<Object> getTodos() {
         List<TodoItem> todoItems = todoRepository.findAll();
-        return ResponseEntity.status(200).body(todoItems);
+        List<OutboundTodoItem> outboundTodoItems = new ArrayList<>();
+        for (TodoItem todoItem : todoItems) {
+            outboundTodoItems.add(OutboundTodoItem.outgoingTodoItemFromTodoItem(todoItem));
+        }
+        return ResponseEntity.status(200).body(outboundTodoItems);
     }
 
     @GetMapping(value = "/{id}")
