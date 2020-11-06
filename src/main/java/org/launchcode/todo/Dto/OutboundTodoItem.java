@@ -1,7 +1,13 @@
 package org.launchcode.todo.Dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.launchcode.todo.Models.TodoItem;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class OutboundTodoItem {
 
 	private int id;
@@ -16,34 +22,6 @@ public class OutboundTodoItem {
 
 	public static OutboundTodoItem createOutboundTodoItemFromTodoItem(TodoItem todoItem) {
 		return new OutboundTodoItem(todoItem);
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getText() {
-		return this.text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public boolean isCompleted() {
-		return this.completed;
-	}
-
-	public boolean getCompleted() {
-		return this.completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
 	}
 
 }

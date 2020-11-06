@@ -1,7 +1,13 @@
 package org.launchcode.todo.Dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.launchcode.todo.Models.Task;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class OutboundTask {
 
 	private Integer id;
@@ -14,22 +20,6 @@ public class OutboundTask {
 
 	public static OutboundTask createOutboundTaskFromTask(Task task) {
 		return new OutboundTask(task);
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getText() {
-		return this.text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 }

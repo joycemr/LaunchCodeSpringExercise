@@ -1,11 +1,17 @@
 package org.launchcode.todo.Dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.launchcode.todo.Models.Task;
 import org.launchcode.todo.Models.TodoItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class OutboundTodoReportItem {
 
 	private int id;
@@ -24,44 +30,6 @@ public class OutboundTodoReportItem {
 
 	public static OutboundTodoReportItem createOutboundTodoReportItemFromTodoItem(TodoItem todoItem) {
 		return new OutboundTodoReportItem(todoItem);
-	}
-
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getText() {
-		return this.text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public boolean isCompleted() {
-		return this.completed;
-	}
-
-	public boolean getCompleted() {
-		return this.completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-
-	public List<OutboundTask> getTasks() {
-		return this.tasks;
-	}
-
-	public void setTasks(List<OutboundTask> tasks) {
-		this.tasks = tasks;
 	}
 
 }
