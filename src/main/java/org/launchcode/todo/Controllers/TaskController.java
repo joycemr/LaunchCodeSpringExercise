@@ -42,7 +42,7 @@ public class TaskController {
         // build a list of outbound Task DTO's
         List<OutboundTask> outboundList = new ArrayList<>();
         for (Task task : listOfTasks) {
-            outboundList.add(new OutboundTask(task));
+            outboundList.add(OutboundTask.createOutboundTaskFromTask(task));
         }
         return ResponseEntity.ok().body(outboundList);
     }
@@ -57,7 +57,7 @@ public class TaskController {
         Task newTask = new Task(incomingTask.getText());
         newTask.setTodoItem(todoItem);
         newTask = taskRepository.save(newTask);
-        OutboundTask newOutboundTask = new OutboundTask(newTask);
+        OutboundTask newOutboundTask = OutboundTask.createOutboundTaskFromTask(newTask);
         URI location = URI.create("http://localhost:8080/todos/" + newTask.getId() + "/tasks");
         return ResponseEntity.created(location).body(newOutboundTask);
     }

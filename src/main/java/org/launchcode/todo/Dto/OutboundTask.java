@@ -12,6 +12,10 @@ public class OutboundTask {
 		this.text = task.getText();
 	}
 
+	public static OutboundTask createOutboundTaskFromTask(Task task) {
+		return new OutboundTask(task);
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

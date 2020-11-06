@@ -2,7 +2,6 @@ package org.launchcode.todo.Controllers;
 
 import org.launchcode.todo.Dto.OutboundTodoItem;
 import org.launchcode.todo.Models.IncomingTodoItem;
-import org.launchcode.todo.Dto.OutboundTodoItem;
 import org.launchcode.todo.Models.TodoItem;
 import org.launchcode.todo.data.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class TodoController {
         List<TodoItem> todoItems = todoRepository.findAll();
         List<OutboundTodoItem> outboundTodoItems = new ArrayList<>();
         for (TodoItem todoItem : todoItems) {
-            outboundTodoItems.add(OutboundTodoItem.outgoingTodoItemFromTodoItem(todoItem));
+            outboundTodoItems.add(OutboundTodoItem.createOutboundTodoItemFromTodoItem(todoItem));
         }
         return ResponseEntity.status(200).body(outboundTodoItems);
     }
@@ -45,7 +44,7 @@ public class TodoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         TodoItem item = todoItem.get();
-        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.outgoingTodoItemFromTodoItem(item);
+        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.createOutboundTodoItemFromTodoItem(item);
         return ResponseEntity.status(200).body(outgoingTodoItem);
     }
 
@@ -64,7 +63,7 @@ public class TodoController {
         }
         TodoItem updatedTodo = todoItem.get().markAsComplete();
         updatedTodo = todoRepository.save(updatedTodo);
-        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.outgoingTodoItemFromTodoItem(updatedTodo);
+        OutboundTodoItem outgoingTodoItem = OutboundTodoItem.createOutboundTodoItemFromTodoItem(updatedTodo);
         return ResponseEntity.status(200).body(outgoingTodoItem);
     }
 
