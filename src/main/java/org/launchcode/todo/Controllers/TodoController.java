@@ -1,7 +1,7 @@
 package org.launchcode.todo.Controllers;
 
+import org.launchcode.todo.Dto.IncomingTodoItem;
 import org.launchcode.todo.Dto.OutboundTodoItem;
-import org.launchcode.todo.Models.IncomingTodoItem;
 import org.launchcode.todo.Models.TodoItem;
 import org.launchcode.todo.data.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.launchcode.todo.Models;
+package org.launchcode.todo.Dto;
 
 public class IncomingTask {
 

@@ -1,7 +1,7 @@
 package org.launchcode.todo.Controllers;
 
+import org.launchcode.todo.Dto.IncomingTask;
 import org.launchcode.todo.Dto.OutboundTask;
-import org.launchcode.todo.Models.IncomingTask;
 import org.launchcode.todo.Models.Task;
 import org.launchcode.todo.Models.TodoItem;
 import org.launchcode.todo.data.TaskRepository;
